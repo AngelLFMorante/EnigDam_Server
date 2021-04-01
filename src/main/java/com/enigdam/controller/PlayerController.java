@@ -7,19 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.enigdam.service.GameService;
+import com.enigdam.service.PlayerService;
 
 @RestController
 @RequestMapping(path = "/game")
-public class GameController {
+public class PlayerController {
 
 	@Autowired
-	GameService service;
+	PlayerService service;
 	
 	@GetMapping("/scores")
-	public List<Map<String, Object>> list(){
-		return service.getAll();
+	public List<Map<String, Object>> scoreList(){
+		return service.getAllScores();
 	}
+	
+
 	
 }
