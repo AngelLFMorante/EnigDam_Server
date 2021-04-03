@@ -17,8 +17,6 @@ public class PlayerService {
 
 	@Autowired
 	PlayerDaoImpl daoImpl;
-	@Autowired
-	EntityManager em;
 	
 	PlayerMapper playerMapper = new PlayerMapper();
 
@@ -38,12 +36,10 @@ public class PlayerService {
 		boolean insert = false;
 		try {
 			daoImpl.addPlayer(player);
-			em.getTransaction().commit();
 			insert = true;
 		}catch(Exception e) {
 			e.printStackTrace();
 			insert = false;
-			em.getTransaction().rollback();
 		}
 		return insert;
 	}
