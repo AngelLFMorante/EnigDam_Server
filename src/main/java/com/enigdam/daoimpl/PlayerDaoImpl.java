@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.enigdam.dao.IPlayerDao;
 import com.enigdam.entity.Player;
 
@@ -37,6 +39,14 @@ public class PlayerDaoImpl implements IPlayerDao {
 	@Override
 	public List<Player> allPlayers() {
 		return em.createQuery("from Player").getResultList();
+	}
+
+
+	@Override
+	@Transactional
+	public void addPlayer(Player player) {
+		 em.persist(player);
+		 em.flush();
 	}
 	
 	

@@ -11,8 +11,8 @@ public interface IPlayerDao {
 	public List<Map<String, Object>>getAllScores();
 	public List<Player> allPlayers();
 //	public List<Map<String, Object>>getOne(int id);
-//	public Game add(Game game);
-//	public Game edit(Game game);
-//	public void delete(int id);
+	public void addPlayer(Player player);
+//	public int edit(Game game);
+//	public int delete(int id);
 	
 }

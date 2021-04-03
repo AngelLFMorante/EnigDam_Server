@@ -24,6 +24,7 @@ public class PlayerMapper {
 		PlayerDto playerDto = new PlayerDto();
 		playerDto.setId(player.getId());
 		playerDto.setUsername(player.getUsername());
+		playerDto.setEmail(player.getEmail());
 		playerDto.setHint(player.getHint());
 		playerDto.setGames(gameMapper.toDtos(player.getGames()));
 		return playerDto;

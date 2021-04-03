@@ -6,9 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.enigdam.dto.PlayerDto;
+import com.enigdam.entity.Player;
 import com.enigdam.service.PlayerService;
 
 @RestController
@@ -30,6 +33,16 @@ public class PlayerController {
 		List<PlayerDto> playerDto = new ArrayList<>();
 			playerDto = service.obtenerPuntuacion();
 		return playerDto;
+	}
+	
+	@PostMapping("/add")
+	public String addPlayer(@RequestBody  Player player) {
+		boolean response = service.addPlayer(player);
+		if(response) {
+			return  "No se pudo registrar";
+		}else {
+			return "El registro se realizó con éxito";
+		}
 	}
 	
 
