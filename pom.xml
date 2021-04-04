@@ -37,6 +37,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.sonatype.plexus/plexus-cipher -->
+		<dependency>
+			<groupId>org.sonatype.plexus</groupId>
+			<artifactId>plexus-cipher</artifactId>
+			<version>1.7</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
 			<groupId>org.postgresql</groupId>

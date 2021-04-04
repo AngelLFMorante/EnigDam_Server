@@ -51,13 +51,15 @@ public class PlayerController {
 	
 	@GetMapping("/verify{code}")
 	public String verifyPlayer(@Param("code") String code) {
-
+		
 		if(serviceEmail.verify(code)) {
-			return "verify_success";
+			return serviceEmail.verifySuccess();
 		}else {
-			return "verify_fail";
+			return serviceEmail.verifyFail();
 		}
 	}
+
+
 	
 
 	
