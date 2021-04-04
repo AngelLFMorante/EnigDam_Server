@@ -46,7 +46,7 @@ public class PlayerMapper {
 		player.setUsername(playerDto.getUsername());
 		player.setPassword(playerDto.getPassword());
 		player.setHint(playerDto.getHint());
-		player.setVerify(playerDto.isVerify());
+		player.setVerified(playerDto.isVerify());
 		return player;
 	}
 	

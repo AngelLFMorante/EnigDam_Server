@@ -3,6 +3,7 @@ package com.enigdam.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,9 @@ public class Player {
 	private String username;
 	private String password;
 	private String hint;
-	private boolean verify;
+	private boolean verified;
+	@Column(name= "verification_code")
+	private String verifyCode; 
 
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
 	private List<Game> games;
@@ -28,8 +31,8 @@ public class Player {
 	public Player() {
 	}
 
-	public Player(int id, String name, String email, String username, String password, String hint, boolean verify,
-			List<Game> games) {
+	public Player(int id, String name, String email, String username, String password, String hint, boolean verified,
+			String verifyCode, List<Game> games) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -37,9 +40,12 @@ public class Player {
 		this.username = username;
 		this.password = password;
 		this.hint = hint;
-		this.verify = verify;
+		this.verified = verified;
+		this.verifyCode = verifyCode;
 		this.games = games;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -89,12 +95,20 @@ public class Player {
 		this.hint = hint;
 	}
 
-	public boolean isVerify() {
-		return verify;
+	public boolean isVerified() {
+		return verified;
 	}
 
-	public void setVerify(boolean verify) {
-		this.verify = verify;
+	public void setVerified(boolean verified) {
+		this.verified = verified;
+	}
+
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
 	}
 
 	public List<Game> getGames() {

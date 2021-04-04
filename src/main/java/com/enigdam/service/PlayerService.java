@@ -3,7 +3,6 @@ package com.enigdam.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,8 @@ public class PlayerService {
 
 	@Autowired
 	PlayerDaoImpl daoImpl;
+	@Autowired
+	EmailService serviceEmail;
 	
 	PlayerMapper playerMapper = new PlayerMapper();
 
@@ -35,7 +36,7 @@ public class PlayerService {
 	public boolean addPlayer(Player player) {
 		boolean insert = false;
 		try {
-			daoImpl.addPlayer(player);
+			serviceEmail.register(player);
 			insert = true;
 		}catch(Exception e) {
 			e.printStackTrace();

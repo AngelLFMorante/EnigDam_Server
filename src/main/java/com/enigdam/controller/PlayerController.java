@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.enigdam.dto.PlayerDto;
 import com.enigdam.entity.Player;
+import com.enigdam.service.EmailService;
 import com.enigdam.service.PlayerService;
 
 @RestController
@@ -21,6 +23,8 @@ public class PlayerController {
 
 	@Autowired
 	PlayerService service;
+	@Autowired
+	EmailService serviceEmail;
 	
 	@GetMapping("/scores")
 	public List<Map<String, Object>> scoreList(){
@@ -42,6 +46,16 @@ public class PlayerController {
 			return  "No se pudo registrar";
 		}else {
 			return "El registro se realizó con éxito";
+		}
+	}
+	
+	@GetMapping("/verify{code}")
+	public String verifyPlayer(@Param("code") String code) {
+
+		if(serviceEmail.verify(code)) {
+			return "verify_success";
+		}else {
+			return "verify_fail";
 		}
 	}
 	
