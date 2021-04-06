@@ -25,7 +25,9 @@ public class PlayerMapper {
 		playerDto.setId(player.getId());
 		playerDto.setUsername(player.getUsername());
 		playerDto.setEmail(player.getEmail());
+		playerDto.setPassword(player.getPassword());
 		playerDto.setHint(player.getHint());
+		playerDto.setVerify(player.isVerified());
 		playerDto.setGames(gameMapper.toDtos(player.getGames()));
 		return playerDto;
 	}

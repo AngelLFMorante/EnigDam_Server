@@ -1,6 +1,7 @@
 package com.enigdam.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,17 +36,17 @@ public class PlayerController {
 	@GetMapping("/players")
 	public List<PlayerDto> puntuaciones(){
 		List<PlayerDto> playerDto = new ArrayList<>();
-			playerDto = service.obtenerPuntuacion();
+			playerDto = service.getAllPlayers();
 		return playerDto;
 	}
 	
 	@PostMapping("/add")
-	public String addPlayer(@RequestBody  Player player) {
+	public Map<String, String> addPlayer(@RequestBody  Player player) {
 		boolean response = service.addPlayer(player);
 		if(response) {
-			return  "No se pudo registrar";
+			return  Collections.singletonMap("response", "Registry success");
 		}else {
-			return "El registro se realizó con éxito";
+			return Collections.singletonMap("response","Unable to register");
 		}
 	}
 	

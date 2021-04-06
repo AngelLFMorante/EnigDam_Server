@@ -26,7 +26,7 @@ public class PlayerService {
 	}
 
 
-	public List<PlayerDto> obtenerPuntuacion() {
+	public List<PlayerDto> getAllPlayers() {
 		List<PlayerDto> players = null;
 		players = playerMapper.toDtos(daoImpl.allPlayers());
 		return players;
@@ -34,10 +34,9 @@ public class PlayerService {
 
 
 	public boolean addPlayer(Player player) {
-		boolean insert = false;
+		boolean insert;
 		try {
-			serviceEmail.register(player);
-			insert = true;
+			insert = serviceEmail.register(player); 
 		}catch(Exception e) {
 			e.printStackTrace();
 			insert = false;
