@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import com.enigdam.daoimpl.PlayerDaoImpl;
 import com.enigdam.entity.Player;
 import com.enigdam.repository.IPlayerRepository;
 import net.bytebuddy.utility.RandomString;
@@ -18,12 +17,11 @@ public class EmailService {
 	@Autowired
 	IPlayerRepository repo;
 	@Autowired
-	PlayerDaoImpl daoImpl;
-	@Autowired
 	private JavaMailSender mailSender;
 
 
-	public boolean register(Player player) {
+	public boolean register(Player player) 
+	{
 		boolean insert;
 		try {
 
@@ -33,7 +31,8 @@ public class EmailService {
 			player.setVerifyCode(randomCode);
 			player.setVerified(false);
 
-			daoImpl.addPlayer(player);
+			repo.save(player);
+			repo.flush();
 
 			sendVerificationEmail(player, siteURL);
 			insert = true;	
@@ -46,8 +45,8 @@ public class EmailService {
 
 	
 
-	private void sendVerificationEmail(Player player, String siteURL) throws MessagingException, IOException {
-
+	private void sendVerificationEmail(Player player, String siteURL) throws MessagingException, IOException 
+	{
 		String toAddress = player.getEmail();
 		String fromAddress = "enigdam.class.info@gmail.com";
 		String senderName = "EnigDam-Class";
@@ -74,8 +73,8 @@ public class EmailService {
 		System.out.println("Email has been sent");
 	}
 
-	public boolean verify(String verificationCode) {
-
+	public boolean verify(String verificationCode) 
+	{
 		Player player = repo.findByVerificationCode(verificationCode);
 
 		if (player == null || player.isVerified()) {
@@ -83,13 +82,15 @@ public class EmailService {
 		} else {
 			player.setVerifyCode(null);
 			player.setVerified(true);
-			daoImpl.addPlayer(player);
+			repo.save(player);
+			repo.flush();
 			return true;
 		}
 
 	}
 
-	public String verifySuccess() {
+	public String verifySuccess()
+	{
 		String content = " <!DOCTYPE html>"
 				+ "<head>"
 				+ "<meta charset='ISO-8859-1'>"
@@ -106,7 +107,8 @@ public class EmailService {
 		return content;
 	}
 
-	public String verifyFail() {
+	public String verifyFail()
+	{
 		String content = "<!DOCTYPE html><head><meta charset='ISO-8859-1'>"
 				+ "<title>User Verification</title>"
 				+ "<link rel='stylesheet' type='text/css' href='/webjars/bootstrap/css/bootstrap.min.css' />"

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Game {
@@ -18,6 +19,7 @@ public class Game {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_user")
+	@JsonBackReference
 	private Player player;
 
 	public Game() {

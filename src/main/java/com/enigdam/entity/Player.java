@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Player {
@@ -26,6 +27,7 @@ public class Player {
 	private String verifyCode; 
 
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<Game> games;
 
 	public Player() {
