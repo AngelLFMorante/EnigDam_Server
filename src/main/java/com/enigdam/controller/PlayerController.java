@@ -70,5 +70,7 @@ public class PlayerController {
 	public void deletePlayer(@Param("id") int id) {
 		service.deletePlayer(id);
 	}
+
+	/*Checkout*/
 	
 }
