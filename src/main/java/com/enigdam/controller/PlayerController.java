@@ -1,6 +1,5 @@
 package com.enigdam.controller;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +40,9 @@ public class PlayerController {
 	}
 	
 	@PostMapping("/add")
-	public Map<String, String> addPlayer(@RequestBody  Player player) 
+	public void addPlayer(@RequestBody  Player player) 
 	{
-		boolean response = service.addPlayer(player);
-		if(response) {
-			return  Collections.singletonMap("response", "Registry success");
-		}else {
-			return Collections.singletonMap("response","Unable to register");
-		}
+		service.addPlayer(player);
 	}
 	
 	@GetMapping("/verify{code}")
@@ -70,7 +64,5 @@ public class PlayerController {
 	public void deletePlayer(@Param("id") int id) {
 		service.deletePlayer(id);
 	}
-
-	/*Checkout*/
 	
 }

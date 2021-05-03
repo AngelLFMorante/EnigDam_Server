@@ -24,7 +24,6 @@ public class EmailService {
 	{
 		boolean insert;
 		try {
-
 			String siteURL = "http://localhost:8080/game/";
 			// Creates a random String of the given length.
 			String randomCode = RandomString.make(64);
