@@ -12,37 +12,54 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.enigdam.entity.Game;
 import com.enigdam.entity.Player;
 import com.enigdam.service.EmailService;
+import com.enigdam.service.GameService;
 import com.enigdam.service.PlayerService;
 
 
 @RestController
 @RequestMapping(path = "/game")
 @Component
-public class PlayerController {
+public class Controller {
 
 	@Autowired
-	PlayerService service;
+	GameService serviceGame;
+	
+	@Autowired
+	PlayerService servicePlayer;
+	
 	@Autowired
 	EmailService serviceEmail;
 	
 	@GetMapping("/scores")
 	public List<Map<String, Object>> scoreList()
 	{
-		return service.getAllScores();
+		return serviceGame.getAllScores();
+	}
+	
+	@PostMapping("/addGame")
+	public void addGame(@RequestBody  Game game) 
+	{
+		serviceGame.addGame(game);
 	}
 	
 	@GetMapping("/players")
 	public List<Player> players()
 	{
-		return service.getAllPlayers();
+		return servicePlayer.getAllPlayers();
+	}
+	@GetMapping("/player{id}")
+	public Player player( @Param("id") int id)
+	{
+		return servicePlayer.getOnePlayer(id);
 	}
 	
 	@PostMapping("/add")
 	public void addPlayer(@RequestBody  Player player) 
 	{
-		service.addPlayer(player);
+		servicePlayer.addPlayer(player);
 	}
 	
 	@GetMapping("/verify{code}")
@@ -57,12 +74,12 @@ public class PlayerController {
 	
 	@PutMapping("/editPlayer{id}")
 	public Player editPlayer(@RequestBody Player player, @Param("id") int id) {
-		return service.editPlayer(player.getUsername(), id);
+		return servicePlayer.editPlayer(player.getUsername(), id);
 	}
 	
 	@DeleteMapping("/deletePlayer{id}")
 	public void deletePlayer(@Param("id") int id) {
-		service.deletePlayer(id);
+		servicePlayer.deletePlayer(id);
 	}
 	
 }
