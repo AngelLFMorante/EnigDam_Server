@@ -73,13 +73,21 @@ public class Controller {
 	}	
 	
 	@PutMapping("/editPlayer{id}")
-	public Player editPlayer(@RequestBody Player player, @Param("id") int id) {
+	public Player editPlayer(@RequestBody Player player, @Param("id") int id) 
+	{
 		return servicePlayer.editPlayer(player.getUsername(), id);
 	}
 	
 	@DeleteMapping("/deletePlayer{id}")
-	public void deletePlayer(@Param("id") int id) {
+	public void deletePlayer(@Param("id") int id) 
+	{
 		servicePlayer.deletePlayer(id);
+	}
+	
+	@GetMapping("/forgetPassword{email}")
+	public void forgetPassword(@Param("email") String email) 
+	{
+		servicePlayer.forgetPassword(email);
 	}
 	
 }

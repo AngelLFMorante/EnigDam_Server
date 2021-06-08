@@ -18,5 +18,6 @@ public interface IPlayerRepository extends JpaRepository<Player, Integer>{
 	@Modifying
 	@Query("UPDATE Player p SET p.username= :username WHERE p.id= :id")
 	public void editUserNamePlayer(@Param("username")String username, @Param("id") Integer id);
+
 	
 }
